@@ -12,8 +12,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.homework.dto.NewPassword;
+import ru.skypro.homework.dto.Register;
 import ru.skypro.homework.dto.UpdateUser;
 import ru.skypro.homework.dto.UserDto;
+import ru.skypro.homework.service.UserService;
 
 @Slf4j
 @CrossOrigin(value = "http://localhost:3000")
@@ -22,6 +24,7 @@ import ru.skypro.homework.dto.UserDto;
 @RequestMapping("/users")
 @Tag(name = "Пользователи")
 public class UserController {
+    private final UserService userService;
 
     @Operation(summary = "Обновление пароля")
     @PostMapping("/set_password")
