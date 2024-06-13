@@ -16,16 +16,12 @@ public interface UserMapper {
 
     UserEntity toUser(UserDto userDto);
 
-    @Mapping(source = "email", target = "username")
     Register toRegister(UserEntity user);
 
-    @Mapping(source = "username", target = "email")
     UserEntity toUser(Register register);
 
-    @Mapping(source = "email", target = "username")
     Login toLogin(UserEntity user);
 
-    @Mapping(source = "username", target = "email")
     UserEntity toUser(Login login);
 
     UpdateUser toUpdateUser(UserEntity user);
