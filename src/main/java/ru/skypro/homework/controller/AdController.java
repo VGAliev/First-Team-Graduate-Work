@@ -45,8 +45,9 @@ public class AdController {
     @GetMapping("/{id}")
     public ResponseEntity<ExtendedAdDTO> getAds(@PathVariable int id, Authentication authentication) {
         if (authentication.isAuthenticated()) {
-            if (adService.getAds(id) != null) {
-                return ResponseEntity.ok().build();
+            ExtendedAdDTO extendedAdDTO = adService.getAds(id);
+            if (extendedAdDTO != null) {
+                return ResponseEntity.ok(extendedAdDTO);
             } else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             }
