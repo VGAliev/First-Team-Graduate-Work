@@ -1,16 +1,14 @@
-package ru.skypro.homework.model;
+package ru.skypro.homework.entity;
 
 import lombok.*;
 import org.apache.catalina.User;
 
 import javax.persistence.*;
-import java.awt.*;
 
 @Entity
 @Table(name = "ads")
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 public class AdEntity {

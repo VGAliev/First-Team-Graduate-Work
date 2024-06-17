@@ -4,7 +4,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 import ru.skypro.homework.dto.CommentDTO;
 import ru.skypro.homework.dto.CreateOrUpdateComment;
-import ru.skypro.homework.modal.CommentEntity;
+import ru.skypro.homework.entity.CommentEntity;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface CommentMapper {
     CommentEntity toComment(CommentDTO commentDTO);
