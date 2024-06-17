@@ -4,13 +4,11 @@ import lombok.*;
 import org.apache.catalina.User;
 
 import javax.persistence.*;
-import java.awt.Image;
 
 @Entity
 @Table(name = "ads")
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 public class AdEntity {
@@ -20,7 +18,7 @@ public class AdEntity {
     private int pk;
     @OneToOne
     @JoinColumn(name = "image_id")
-    private java.awt.Image image;
+    private Image image;
     private int price;
     private String title;
     private String description;
@@ -36,11 +34,11 @@ public class AdEntity {
         this.pk = pk;
     }
 
-    public java.awt.Image getImage() {
+    public Image getImage() {
         return image;
     }
 
-    public void setImage(java.awt.Image image) {
+    public void setImage(Image image) {
         this.image = image;
     }
 
