@@ -20,5 +20,5 @@ public class UserEntity {
     private String phone;
     @Enumerated(EnumType.STRING)
     private Role role;
-
+    private String image;
 }

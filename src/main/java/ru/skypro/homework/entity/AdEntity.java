@@ -1,10 +1,10 @@
-package ru.skypro.homework.model;
+package ru.skypro.homework.entity;
 
 import lombok.*;
 import org.apache.catalina.User;
 
 import javax.persistence.*;
-import java.awt.*;
+import java.awt.Image;
 
 @Entity
 @Table(name = "ads")
@@ -20,7 +20,7 @@ public class AdEntity {
     private int pk;
     @OneToOne
     @JoinColumn(name = "image_id")
-    private Image image;
+    private java.awt.Image image;
     private int price;
     private String title;
     private String description;
@@ -36,11 +36,11 @@ public class AdEntity {
         this.pk = pk;
     }
 
-    public Image getImage() {
+    public java.awt.Image getImage() {
         return image;
     }
 
-    public void setImage(Image image) {
+    public void setImage(java.awt.Image image) {
         this.image = image;
     }
 

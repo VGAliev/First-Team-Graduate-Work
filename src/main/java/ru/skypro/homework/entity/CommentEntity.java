@@ -1,4 +1,4 @@
-package ru.skypro.homework.modal;
+package ru.skypro.homework.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
