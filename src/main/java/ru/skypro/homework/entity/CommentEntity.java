@@ -1,7 +1,8 @@
-package ru.skypro.homework.modal;
+package ru.skypro.homework.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,10 +15,14 @@ import java.time.LocalDateTime;
 public class CommentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private Integer authorId;
-    private LocalDateTime time;
-    private String authorName;
-    private String authorAvatar;
+    private Integer pk;
+    private Integer author;
+    private Integer createdAt;
+    private String authorFirstName;
+    private String authorImage;
     private String text;
+
+    public CommentEntity(String text) {
+        this.text = text;
+    }
 }

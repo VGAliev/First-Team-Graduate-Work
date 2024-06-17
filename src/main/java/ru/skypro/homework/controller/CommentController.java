@@ -30,8 +30,7 @@ public class CommentController {
     }
 
     @DeleteMapping("{adsId}/comments/{commentId}")
-    public ResponseEntity<List<CommentDTO>> deleteCommentsByAdsId(Integer adsId, Integer commentId) {
-        return new ResponseEntity<>(HttpStatus.valueOf(200));
+    public void deleteCommentsByAdsId(Integer adsId, Integer commentId) {
     }
 
     @PutMapping("{adsId}/comments/{commentId}")
