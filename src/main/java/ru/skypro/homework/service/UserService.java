@@ -1,12 +1,12 @@
 package ru.skypro.homework.service;
 
 import ru.skypro.homework.dto.UpdateUser;
-import ru.skypro.homework.dto.UserDto;
+import ru.skypro.homework.entity.UserEntity;
 
 public interface UserService {
     void setPassword();
 
-    UserDto getUser();
+    UserEntity getUser(String email);
 
     UpdateUser updateUser(UpdateUser updateUser);
 

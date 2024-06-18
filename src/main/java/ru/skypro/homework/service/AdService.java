@@ -12,7 +12,7 @@ public interface AdService {
     AdsDTO getAllAds();
 
     // Добавление объявления. AddAd required: image, properties
-    AdDTO addAd(MultipartFile image, CreateOrUpdateAdDTO properties);
+    AdDTO addAd(MultipartFile image, CreateOrUpdateAdDTO properties, String email);
 
     // Получение информации об объявлении, getAds, параметр - id
     ExtendedAdDTO getAds(int id);

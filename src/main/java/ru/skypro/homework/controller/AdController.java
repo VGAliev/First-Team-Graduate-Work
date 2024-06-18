@@ -40,7 +40,7 @@ public class AdController {
             @RequestParam CreateOrUpdateAdDTO properties,
             Authentication authentication) {
         if (authentication.isAuthenticated()) {
-            return ResponseEntity.status(HttpStatus.CREATED).body(adService.addAd(image, properties));
+            return ResponseEntity.status(HttpStatus.CREATED).body(adService.addAd(image, properties, authentication.getName()));
         }
         else return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
