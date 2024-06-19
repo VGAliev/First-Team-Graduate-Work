@@ -32,7 +32,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     @Transactional
     public boolean register(Register register) {
-        UserEntity user = userService.saveUser(mapper.toUser(register));
+        UserEntity user = userService.saveNewUser(mapper.toUser(register));
         return user != null;
     }
 }

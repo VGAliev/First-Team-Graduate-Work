@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 import ru.skypro.homework.entity.UserEntity;
 import ru.skypro.homework.repository.UserRepository;
 
-import java.util.Optional;
-
 @Service
 @RequiredArgsConstructor
 public class MyUserDetailsService implements UserDetailsService {
@@ -17,7 +15,7 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserEntity user = userRepository.findUserEntityByEmail(username);
+        UserEntity user = userRepository.findByEmailIgnoreCase(username);
         if (user == null)
             throw new UsernameNotFoundException(username);
         return new MyUserPrincipal(user);

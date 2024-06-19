@@ -63,7 +63,7 @@ public class UserController {
     })
     public ResponseEntity<UpdateUser> updateUser(@RequestBody(required = false) UpdateUser user) {
         log.info("Method updateUser() in UserController is used");
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(userService.updateUser(user));
     }
 
     @Operation(summary = "Обновление аватара авторизованного пользователя")
@@ -74,6 +74,7 @@ public class UserController {
     })
     public ResponseEntity<Void> updateUserImage(@RequestParam MultipartFile image) {
         log.info("Method updateUserImage() in UserController is used");
+        userService.updateUserImage(image);
         return ResponseEntity.ok().build();
     }
 }
