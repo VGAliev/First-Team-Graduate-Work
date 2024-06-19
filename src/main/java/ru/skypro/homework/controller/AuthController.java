@@ -29,7 +29,7 @@ public class AuthController {
             @ApiResponse(responseCode = "400")
     })
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody Register register) {
+    public ResponseEntity<Void> register(@RequestBody Register register) {
         if (authService.register(register)) {
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } else {
@@ -43,7 +43,7 @@ public class AuthController {
             @ApiResponse(responseCode = "200"),
             @ApiResponse(responseCode = "401")
     })
-    public ResponseEntity<?> login(@RequestBody Login login) {
+    public ResponseEntity<Void> login(@RequestBody Login login) {
         if (authService.login(login.getUsername(), login.getPassword())) {
             return ResponseEntity.ok().build();
         } else {
