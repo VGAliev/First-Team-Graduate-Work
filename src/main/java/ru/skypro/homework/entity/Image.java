@@ -17,11 +17,4 @@ public class Image {
     private long fileSize; // Это поле содержит информацию о размере файла в байтах.
     private String mediaType; // Тип файла.
     private byte[] data; // В этом поле хранится сама информация о файле, представленная в массиве байтов
-
-    // TODO при создании класса Объявления, добавить сюда поле
-    @OneToOne
-    @JoinColumn(name = "user_entity_id")
-    private UserEntity user;
-
-
 }
