@@ -4,10 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
@@ -21,6 +18,9 @@ public class CommentEntity {
     private String authorFirstName;
     private String authorImage;
     private String text;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ad_id")
+    private AdEntity ad;
 
     public CommentEntity(String text) {
         this.text = text;

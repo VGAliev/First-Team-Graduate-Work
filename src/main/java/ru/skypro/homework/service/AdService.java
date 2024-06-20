@@ -5,6 +5,9 @@ import ru.skypro.homework.dto.AdDTO;
 import ru.skypro.homework.dto.AdsDTO;
 import ru.skypro.homework.dto.CreateOrUpdateAdDTO;
 import ru.skypro.homework.dto.ExtendedAdDTO;
+import ru.skypro.homework.entity.CommentEntity;
+
+import java.util.Optional;
 
 public interface AdService {
 
@@ -30,6 +33,9 @@ public interface AdService {
     // Обновление картинки объявления updateImage, параметр - id,
     // requestBody - multipart required image, type - String
     String [] updateImage (int id, MultipartFile image);
+
+    CommentEntity getCommentByID(Integer id);
+
 
 
 

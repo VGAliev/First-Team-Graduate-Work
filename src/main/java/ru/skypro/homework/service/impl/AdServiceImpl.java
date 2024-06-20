@@ -6,10 +6,20 @@ import ru.skypro.homework.dto.AdDTO;
 import ru.skypro.homework.dto.AdsDTO;
 import ru.skypro.homework.dto.CreateOrUpdateAdDTO;
 import ru.skypro.homework.dto.ExtendedAdDTO;
+import ru.skypro.homework.entity.CommentEntity;
+import ru.skypro.homework.repository.AdRepository;
 import ru.skypro.homework.service.AdService;
+
+import java.util.Optional;
 
 @Service
 public class AdServiceImpl implements AdService {
+    private AdRepository adRepository;
+
+    public AdServiceImpl(AdRepository adRepository) {
+        this.adRepository = adRepository;
+    }
+
     @Override
     public AdsDTO getAllAds() {
         return null;
@@ -43,5 +53,10 @@ public class AdServiceImpl implements AdService {
     @Override
     public String[] updateImage(int id, MultipartFile image) {
         return new String[0];
+    }
+
+    @Override
+    public CommentEntity getCommentByID(Integer id) {
+        return adRepository.findCommentById(id).get();
     }
 }

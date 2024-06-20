@@ -34,7 +34,7 @@ public class CommentController {
     }
 
     @PutMapping("{adsId}/comments/{commentId}")
-    public ResponseEntity<CommentDTO> updateComment(@PathVariable Integer adsId,@PathVariable String text) {
+    public ResponseEntity<CommentDTO> updateComment(@PathVariable Integer adsId,@PathVariable Integer commentId, String text) {
         return new ResponseEntity<>(HttpStatus.valueOf(200));
     }
 

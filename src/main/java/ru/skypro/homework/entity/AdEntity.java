@@ -4,6 +4,7 @@ import lombok.*;
 import org.apache.catalina.User;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "ads")
@@ -25,6 +26,9 @@ public class AdEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User author;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    private List<CommentEntity> comment;
 
     public int getPk() {
         return pk;
