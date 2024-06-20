@@ -1,5 +1,6 @@
 package ru.skypro.homework.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -20,6 +21,7 @@ public class CommentEntity {
     private String authorImage;
     private String text;
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     @JoinColumn(name = "ad_id",nullable = false)
     private Ad ad;
 
@@ -31,12 +33,4 @@ public class CommentEntity {
         this.text = text;
     }
 
-    public CommentEntity(Integer pk, String text) {
-        this.pk = pk;
-        this.text = text;
-    }
-
-    public CommentEntity(Integer pk) {
-        this.pk = pk;
-    }
 }

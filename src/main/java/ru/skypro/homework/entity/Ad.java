@@ -28,7 +28,7 @@ public class Ad {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private UserEntity author;
-    @OneToMany(mappedBy="ads")
+    @OneToMany(mappedBy="ad")
     @JsonIgnore
     private List<CommentEntity> comments;
 

@@ -69,9 +69,9 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public CommentDTO patchCommentId(Integer adId, Integer commentId, String text) {
+    public CommentDTO patchCommentId(Integer adId, Integer commentId, CreateOrUpdateComment createOrUpdateComment, Authentication authentication) {
         CommentEntity commentEntity = adRepository.findById(adId).get().getComments().get(commentId);
-        commentEntity.setText(text);
+        commentEntity.setText(createOrUpdateComment.getText());
         return commentMapper.toDto(commentRepository.save(commentEntity));
     }
 }
