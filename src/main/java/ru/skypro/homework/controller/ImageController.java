@@ -1,5 +1,6 @@
 package ru.skypro.homework.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -10,12 +11,13 @@ import ru.skypro.homework.entity.Image;
 import ru.skypro.homework.service.impl.ImageServiceImpl;
 
 import java.io.IOException;
-@CrossOrigin(value = "http://localhost:8080")
+@Slf4j
 @RestController
+@CrossOrigin(value = "http://localhost:3000")
 @RequestMapping("image")
 public class ImageController{
 
-    private ImageServiceImpl imageService;
+    private final ImageServiceImpl imageService;
 
     public ImageController(ImageServiceImpl imageService) {
         this.imageService = imageService;
@@ -31,11 +33,16 @@ public class ImageController{
 
     @GetMapping("{id}")
     public ResponseEntity<byte[]> downloadImage(@PathVariable Long id) {
+        log.info("Method downloadImage() in ImageController is used");
         Image image = imageService.getImage(id);
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.parseMediaType(image.getMediaType()));
-        headers.setContentLength(image.getData().length);
-        return ResponseEntity.status(HttpStatus.OK).headers(headers).body(image.getData());
+        if (image != null) {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.parseMediaType(image.getMediaType()));
+            headers.setContentLength(image.getData().length);
+            return ResponseEntity.status(HttpStatus.OK).headers(headers).body(image.getData());
+        }
+        log.error("Image is not found");
+        return ResponseEntity.notFound().build();
     }
 
 }

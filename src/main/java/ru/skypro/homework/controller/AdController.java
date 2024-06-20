@@ -17,6 +17,7 @@ import ru.skypro.homework.service.AdService;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(value = "http://localhost:3000")
 @RequestMapping("ads")
 public class AdController {
 
@@ -102,7 +103,7 @@ public class AdController {
     // Получение объявлений авторизованного пользователя (200 или 401)
     public ResponseEntity<AdsDTO> getAdsMe(String email, Authentication authentication) {
         if (authentication.isAuthenticated()) {
-            return ResponseEntity.ok(adService.getAdsMe(email));
+            return ResponseEntity.ok(adService.getAdsMe());
         }
         else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

@@ -25,7 +25,7 @@ public interface AdService {
 
     // Получение объявлений авторизованного пользователя, getAdsMe.
     // Проверка авторизации пользователя по логину (email), иначе - 401 ошибка
-    AdsDTO getAdsMe(String email);
+    AdsDTO getAdsMe();
 
     // Обновление картинки объявления updateImage, параметр - id,
     // requestBody - multipart required image, type - String

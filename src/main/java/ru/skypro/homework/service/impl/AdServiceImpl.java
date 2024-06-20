@@ -80,8 +80,8 @@ public class AdServiceImpl implements AdService {
     }
 
     @Override
-    public AdsDTO getAdsMe(String email) {
-        int userId = userService.getUser(email).getId();
+    public AdsDTO getAdsMe() {
+        int userId = userService.getUser().getId();
         List<AdDTO> myAds = adRepository.findAll().stream()
                 .filter(ad -> ad.getAuthor().getId() == userId)
                 .map(adMapper::adToAdDTO).collect(Collectors.toList());
