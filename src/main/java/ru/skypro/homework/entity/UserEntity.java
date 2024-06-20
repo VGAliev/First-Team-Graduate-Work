@@ -13,6 +13,7 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(unique = true)
     private String email;
     private String password;
     private String firstName;
@@ -20,5 +21,7 @@ public class UserEntity {
     private String phone;
     @Enumerated(EnumType.STRING)
     private Role role;
-    private String image;
+    @OneToOne
+    @JoinColumn(name = "image_id")
+    private Image image;
 }

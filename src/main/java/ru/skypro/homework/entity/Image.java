@@ -1,9 +1,6 @@
 package ru.skypro.homework.entity;
 
 
-
-
-
 import javax.persistence.*;
 import java.util.Arrays;
 import java.util.Objects;
