@@ -1,5 +1,6 @@
 package ru.skypro.homework.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.skypro.homework.dto.Role;
@@ -23,5 +24,6 @@ public class UserEntity {
     private Role role;
     @OneToOne
     @JoinColumn(name = "image_id")
+    @JsonIgnore
     private Image image;
 }
