@@ -30,6 +30,7 @@ public class AuthController {
     })
     @PostMapping("/register")
     public ResponseEntity<Void> register(@RequestBody Register register) {
+        log.info("Method register() in AuthController is used");
         if (authService.register(register)) {
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } else {
@@ -44,6 +45,7 @@ public class AuthController {
             @ApiResponse(responseCode = "401")
     })
     public ResponseEntity<Void> login(@RequestBody Login login) {
+        log.info("Method login() in AuthController is used");
         if (authService.login(login.getUsername(), login.getPassword())) {
             return ResponseEntity.ok().build();
         } else {

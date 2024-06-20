@@ -17,6 +17,8 @@ import ru.skypro.homework.dto.UpdateUser;
 import ru.skypro.homework.dto.UserDto;
 import ru.skypro.homework.service.UserService;
 
+import java.io.IOException;
+
 @Slf4j
 @CrossOrigin(value = "http://localhost:3000")
 @RestController
@@ -74,7 +76,11 @@ public class UserController {
     })
     public ResponseEntity<Void> updateUserImage(@RequestParam MultipartFile image) {
         log.info("Method updateUserImage() in UserController is used");
-        userService.updateUserImage(image);
+        try {
+            userService.updateUserImage(image);
+        } catch (IOException e) {
+            return ResponseEntity.badRequest().build();
+        }
         return ResponseEntity.ok().build();
     }
 }
