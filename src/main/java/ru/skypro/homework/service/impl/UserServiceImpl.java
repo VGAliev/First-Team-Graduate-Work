@@ -81,7 +81,6 @@ public class UserServiceImpl implements UserService {
             UserEntity user = currentUser();
             Image newImage = imageService.uploadImage(image);
             user.setImage(newImage);
-            newImage.setUser(user);
             userRepository.save(user);
         }
     }
