@@ -2,6 +2,7 @@ package ru.skypro.homework.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,7 +15,10 @@ import ru.skypro.homework.entity.Image;
 import ru.skypro.homework.entity.UserEntity;
 import ru.skypro.homework.mapper.UserMapper;
 import ru.skypro.homework.repository.UserRepository;
+import ru.skypro.homework.service.ImageService;
 import ru.skypro.homework.service.UserService;
+
+import java.io.IOException;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +26,9 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserMapper mapper;
     private final PasswordEncoder encoder;
+    private final ImageService imageService;
+
+
 
     @Override
     public UserEntity saveNewUser(UserEntity user) {
@@ -35,7 +42,7 @@ public class UserServiceImpl implements UserService {
     public boolean setPassword(NewPassword newPassword) {
         UserEntity user = currentUser();
         if (encoder.matches(newPassword.getCurrentPassword(), user.getPassword())) {
-            user.setPassword(newPassword.getNewPassword());
+            user.setPassword(encoder.encode(newPassword.getNewPassword()));
             userRepository.save(user);
             return true;
         }
@@ -48,7 +55,7 @@ public class UserServiceImpl implements UserService {
         if (user != null) {
             return mapper.toUserDto(user);
         }
-        return null;
+        throw new RuntimeException("Нет авторизованного пользователя");
     }
 
     @Override
@@ -69,10 +76,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUserImage(MultipartFile image) {
+    public void updateUserImage(MultipartFile image) throws IOException {
         if (image != null) {
             UserEntity user = currentUser();
-            user.setImage((Image) image);
+            Image newImage = imageService.uploadImage(image);
+            user.setImage(newImage);
             userRepository.save(user);
         }
     }
