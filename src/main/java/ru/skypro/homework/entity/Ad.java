@@ -1,13 +1,16 @@
 package ru.skypro.homework.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "ads")
+@Table(name = "ad")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,8 +18,8 @@ public class Ad {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int pk;
-    @OneToOne
+    private int id;
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "image_id")
     private Image image;
     private int price;
@@ -25,6 +28,9 @@ public class Ad {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private UserEntity author;
+    @OneToMany(mappedBy="ads")
+    @JsonIgnore
+    private List<CommentEntity> comments;
 
     public Ad(UserEntity author, String title, int price, String description) {
         this.author = author;

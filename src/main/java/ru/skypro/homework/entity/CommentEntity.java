@@ -1,28 +1,42 @@
 package ru.skypro.homework.entity;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @Entity
+@Table(name = "comment")
 public class CommentEntity {
+    @Column(name = "id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer pk;
     private Integer author;
-    private Integer createdAt;
+    @Column(name="created_at")
+    private Long createdAt;
     private String authorFirstName;
     private String authorImage;
     private String text;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ad_id")
-    private AdEntity ad;
+    @JoinColumn(name = "ad_id",nullable = false)
+    private Ad ad;
 
-    public CommentEntity(String text) {
+    public CommentEntity(Integer author, Long createdAt, String authorFirstName, String authorImage, String text) {
+        this.author = author;
+        this.createdAt = createdAt;
+        this.authorFirstName = authorFirstName;
+        this.authorImage = authorImage;
         this.text = text;
+    }
+
+    public CommentEntity(Integer pk, String text) {
+        this.pk = pk;
+        this.text = text;
+    }
+
+    public CommentEntity(Integer pk) {
+        this.pk = pk;
     }
 }

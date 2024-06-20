@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 public class CommentDTO {
     private Integer pk;
     private Integer author;
-    private Integer createdAt;
+    private Long createdAt;
     private String authorFirstName;
     private String authorImage;
     private String text;

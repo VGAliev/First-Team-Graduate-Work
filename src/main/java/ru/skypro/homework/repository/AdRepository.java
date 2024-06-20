@@ -12,5 +12,6 @@ import ru.skypro.homework.entity.Ad;
 public interface AdRepository extends JpaRepository<Ad, Integer> {
     @Override
     Optional<Ad> findById(Integer id);
+
     Optional<CommentEntity> findCommentById(Integer id);
 }
