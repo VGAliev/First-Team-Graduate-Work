@@ -1,15 +1,9 @@
 package ru.skypro.homework.entity;
 
 
-
-
-
-import lombok.Data;
-
 import javax.persistence.*;
 @Entity
 @Table(name = "image")
-@Data
 public class Image {
 
     @Id

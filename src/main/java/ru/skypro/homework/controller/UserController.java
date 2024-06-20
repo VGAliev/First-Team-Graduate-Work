@@ -7,12 +7,12 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.homework.dto.NewPassword;
-import ru.skypro.homework.dto.Register;
 import ru.skypro.homework.dto.UpdateUser;
 import ru.skypro.homework.dto.UserDto;
 import ru.skypro.homework.service.UserService;
@@ -35,7 +35,10 @@ public class UserController {
     })
     public ResponseEntity<Void> setPassword(@RequestBody(required = false) NewPassword newPassword) {
         log.info("Method setPassword() in UserController is used");
-        return ResponseEntity.ok().build();
+        if (userService.setPassword(newPassword)){
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
 
     @Operation(summary = "Получение информации об авторизованном пользователе")
@@ -46,7 +49,10 @@ public class UserController {
     })
     public ResponseEntity<UserDto> getUser() {
         log.info("Method getUser() in UserController is used");
-        return ResponseEntity.ok().build();
+        UserDto user = userService.getUser();
+        if (user!= null) {
+            return ResponseEntity.ok(user);
+        } return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
     @Operation(summary = "Обновление информации об авторизованном пользователе")
@@ -57,7 +63,7 @@ public class UserController {
     })
     public ResponseEntity<UpdateUser> updateUser(@RequestBody(required = false) UpdateUser user) {
         log.info("Method updateUser() in UserController is used");
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(userService.updateUser(user));
     }
 
     @Operation(summary = "Обновление аватара авторизованного пользователя")
@@ -68,6 +74,7 @@ public class UserController {
     })
     public ResponseEntity<Void> updateUserImage(@RequestParam MultipartFile image) {
         log.info("Method updateUserImage() in UserController is used");
+        userService.updateUserImage(image);
         return ResponseEntity.ok().build();
     }
 }
