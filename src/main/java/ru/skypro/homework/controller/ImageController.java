@@ -21,7 +21,7 @@ public class ImageController{
         this.imageService = imageService;
     }
 
-    @PostMapping(value = "/image", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<String> uploadImage(@RequestParam MultipartFile image) throws IOException {
         imageService.uploadImage(image);
         return ResponseEntity.ok().build();
@@ -29,7 +29,7 @@ public class ImageController{
 
     }
 
-    @GetMapping(value = "image/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<byte[]> downloadImage(@PathVariable Long id) {
         Image image = imageService.getImage(id);
         HttpHeaders headers = new HttpHeaders();
