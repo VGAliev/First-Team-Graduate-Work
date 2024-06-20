@@ -14,7 +14,7 @@ public class AdMapper {
         return new AdDTO(
                 ad.getAuthor().getId(),
                 "/image/" + ad.getImage().getId(),
-                ad.getPk(),
+                ad.getId(),
                 ad.getPrice(),
                 ad.getTitle()
         );
@@ -27,7 +27,7 @@ public class AdMapper {
     public ExtendedAdDTO adToExtendedAdDTO(Ad ad) {
         UserEntity author = ad.getAuthor();
         Image image = ad.getImage();
-        return new ExtendedAdDTO(ad.getPk(),
+        return new ExtendedAdDTO(ad.getId(),
                 author.getFirstName(),
                 author.getLastName(),
                 ad.getDescription(),

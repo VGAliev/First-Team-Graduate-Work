@@ -106,4 +106,9 @@ public class AdServiceImpl implements AdService {
          */
         return new String[]{"Ошибка при загрузке изображения"};
     }
+
+    @Override
+    public CommentEntity getCommentByID(Integer id) {
+        return adRepository.findCommentById(id).get();
+    }
 }
