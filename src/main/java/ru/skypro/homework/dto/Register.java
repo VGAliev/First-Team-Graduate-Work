@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.Objects;
 
 @Data
 public class Register {
@@ -20,10 +21,12 @@ public class Register {
     @Size(min = 2, max = 16)
     @Schema(description = "фамилия пользователя")
     private String lastName;
-    @Pattern(regexp="\\+7\\s?\\(?\\d{3}\\)?\\s?\\d{3}-?\\d{2}-?\\d{2}")
+    @Pattern(regexp = "\\+7\\s?\\(?\\d{3}\\)?\\s?\\d{3}-?\\d{2}-?\\d{2}")
     @Schema(description = "телефон пользователя")
     private String phone;
     // todo enum
     @Schema(description = "роль ползователя")
     private Role role;
+
+
 }

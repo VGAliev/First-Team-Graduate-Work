@@ -23,6 +23,8 @@ public class UserServiceImpl implements UserService {
     private final UserMapper mapper;
     private final PasswordEncoder encoder;
 
+
+
     @Override
     public UserEntity saveNewUser(UserEntity user) {
         if (getUser(user.getEmail()) == null) {
