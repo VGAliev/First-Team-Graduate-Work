@@ -10,9 +10,11 @@ import ru.skypro.homework.dto.AdsDTO;
 import ru.skypro.homework.dto.CreateOrUpdateAdDTO;
 import ru.skypro.homework.dto.ExtendedAdDTO;
 import ru.skypro.homework.entity.Ad;
+import ru.skypro.homework.entity.UserEntity;
 import ru.skypro.homework.exception.AdNotFoundException;
 import ru.skypro.homework.mapper.AdMapper;
 import ru.skypro.homework.repository.AdRepository;
+import ru.skypro.homework.repository.UserRepository;
 import ru.skypro.homework.service.AdService;
 import ru.skypro.homework.service.ImageService;
 import ru.skypro.homework.service.UserService;
@@ -30,6 +32,7 @@ public class AdServiceImpl implements AdService {
     private final AdMapper adMapper;
     private final UserService userService;
     private final ImageService imageService;
+    private final UserRepository userRepository;
 
 
     @Override
@@ -44,9 +47,9 @@ public class AdServiceImpl implements AdService {
     @Override
     public AdDTO addAd(MultipartFile image, CreateOrUpdateAdDTO properties, String email) {
         try {
+
             Ad ad = adMapper.createOrUpdateAdToAd(properties, userService.getUser(email));
             ad.setImage(imageService.uploadImage(image));
-
             return adMapper.adToAdDTO(adRepository.save(ad));
         } catch (Exception e) {
             log.error("Ошибка при загрузке изображения: ");
@@ -98,7 +101,7 @@ public class AdServiceImpl implements AdService {
             log.error("Ошибка при загрузке изображения");
         }
         /* Возвращаем значение в случае ошибки
-         если возникает исключение IOException, метод  возвращает массив строк,
+         если возникает исключение IOException, метод возвращает массив строк,
          который указывает на ошибку
          */
         return new String[]{"Ошибка при загрузке изображения"};
